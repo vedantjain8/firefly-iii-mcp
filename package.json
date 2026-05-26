@@ -1,0 +1,18 @@
+{
+  "name": "firefly-iii-mcp",
+  "version": "1.0.0",
+  "description": "MCP server with full Firefly III API v1 coverage — HTTP Streamable + stdio",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start":      "node src/index.js",
+    "start:stdio": "MCP_TRANSPORT=stdio node src/index.js",
+    "dev":        "node --watch src/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.10.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

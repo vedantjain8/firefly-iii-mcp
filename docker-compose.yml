@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  # ── Firefly III MCP Server ─────────────────────────────────────────────────
+  firefly-mcp:
+    build: .
+    image: firefly-iii-mcp:latest
+    environment:
+      FIREFLY_URL:    ${FIREFLY_URL}      # https://your-firefly.example.com
+      FIREFLY_TOKEN:  ${FIREFLY_TOKEN}    # Personal Access Token
+      MCP_TRANSPORT:  http               # or 'stdio'
+      PORT:           3000
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
