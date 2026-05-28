@@ -27,6 +27,7 @@ const JSON_HEADERS = {
  */
 async function request(path, opts = {}, isBinary = false) {
   const url = `${BASE_URL}/api${path}`;
+  console.error(`[firefly-mcp] API Hit: ${opts.method || 'GET'} /api${path.split('?')[0]}`);
   const res = await fetch(url, opts);
 
   if (res.status === 204) return null;

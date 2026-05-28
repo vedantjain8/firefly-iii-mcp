@@ -1,13 +1,16 @@
 services:
   firefly-mcp:
-    image: ghcr.io/vedantjain8/firefly-iii-mcp:latest
-    container_name: firefly_mcp
+    build:
+      context: .
+      network: host
+    image: firefly-iii-mcp:dev
+    container_name: firefly_mcp_dev
     hostname: fireflymcp
-    ports:
-      - "3000:3000"
+    network_mode: host
     environment:
       FIREFLY_URL: ${FIREFLY_URL}
       FIREFLY_TOKEN: ${FIREFLY_TOKEN}
+      ALLOWED_TAGS: ${ALLOWED_TAGS}
       MCP_TRANSPORT: http
       PORT: 3000
     restart: unless-stopped
@@ -16,7 +19,7 @@ services:
         - CMD
         - wget
         - -qO-
-        - http://fireflymcp:3000/health
+        - http://localhost:3000/health
       interval: 30s
       timeout: 5s
       retries: 3

@@ -57,6 +57,8 @@ function createServer() {
       throw new McpError(ErrorCode.MethodNotFound, `Unknown or disabled tool: ${name}`);
     }
 
+    console.error(`[firefly-mcp] Tool Called: ${name}`);
+
     const handler = toolDef.handler;
 
     try {
